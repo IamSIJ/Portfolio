@@ -1,0 +1,10 @@
+{
+    "transactions": [
+        {
+            "date": "DD-MM-YYYY",
+            "amount": 100.0,
+            "description": "Sample transaction"
+        }
+    ],
+    "budget": 1000.0
+}
