@@ -3,7 +3,8 @@
         {
             "date": "DD-MM-YYYY",
             "amount": 100.0,
-            "description": "Sample transaction"
+            "description": "Sample transaction",
+            "category": "Other"
         }
     ],
     "budget": 1000.0

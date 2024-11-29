@@ -21,14 +21,14 @@ This Personal Finance Tracker is a desktop application built with Python and Cus
 ## Installation
 1. Clone this repository or download the source code.
 2. Install the required packages:
-   ```
+   ```bash
    pip install customtkinter pandas openpyxl
    ```
 
 ## Usage
 1. Run the script:
-   ```
-   python finance_tracker.py
+   ```bash
+   python main.py
    ```
 2. Use the left panel to add transactions and set your budget.
 3. View your transactions and budget status in the right panel.
@@ -36,19 +36,22 @@ This Personal Finance Tracker is a desktop application built with Python and Cus
 
 ## File Structure
 - `finance_tracker.py`: The main Python script containing the application code.
+- `transaction.py`: The script defining the `Transaction` class.
+- `config.py`: Configuration file containing settings and constants.
+- `main.py`: The entry point of the application.
 - `data.json`: JSON file where transactions and budget data are stored.
 
 ## Functions
 - `load_data()`: Load transaction and budget data from the JSON file.
-- `save_data(data)`: Save data to the JSON file.
-- `add_transaction(date, amount, description)`: Add a new transaction.
-- `import_transactions()`: Import transactions from JSON or Excel files.
-- `export_to_excel()`: Export transactions to an Excel file.
-- `update_budget_status()`: Update the budget display and progress bar.
+- `save_data()`: Save data to the JSON file.
+- `add_transaction()`: Add a new transaction.
+- `import_data()`: Import transactions from JSON or Excel files.
+- `export_data()`: Export transactions to an Excel file.
+- `update_ui()`: Update the budget display and progress bar.
 
 ## UI Components
 - Left Frame:
-  - Input fields for date, amount, and description
+  - Input fields for date, amount, description, and category
   - Buttons for adding transactions, setting budget, importing, and exporting data
 - Right Frame:
   - Text box displaying all transactions
@@ -63,7 +66,8 @@ Transactions and budget information are stored in a `data.json` file in the foll
     {
       "date": "DD-MM-YYYY",
       "amount": 100.00,
-      "description": "Sample transaction"
+      "description": "Sample transaction",
+      "category": "Sample category"
     }
   ],
   "budget": 1000.00
@@ -71,8 +75,8 @@ Transactions and budget information are stored in a `data.json` file in the foll
 ```
 
 ## Customization
-- The currency format is set to Pakistani Rupees (Rs). Modify the `format_currency()` function to change this.
-- The date format is DD-MM-YY. Adjust the `format_date()` function if a different format is preferred.
+- The currency format is set to Pakistani Rupees (Rs). Modify the `update_ui()` function to change this.
+- The date format is DD-MM-YY. Adjust the `add_transaction()` function if a different format is preferred.
 
 ## License
 This project is open-source and available under the MIT License.

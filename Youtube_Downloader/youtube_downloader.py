@@ -16,7 +16,7 @@ def download_video():
 	save_directory = filedialog.askdirectory()
 	if not save_directory:
 		messagebox.showerror("Error", "Please select a directory to save the video.")
-		return
+		return none
 
 	# Create YouTube object and get the selected stream
 	yt = YouTube(url_entry.get())
