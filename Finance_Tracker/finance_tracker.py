@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import json
 import os
+import re
 import pandas as pd
 from datetime import datetime
 from tkinter import messagebox, filedialog
@@ -34,6 +35,7 @@ class FinanceTracker:
         # Input fields
         ctk.CTkLabel(self.left_frame, text="Date (DD-MM-YY):").pack(pady=5)
         self.date_entry = ctk.CTkEntry(self.left_frame)
+        self.date_entry.insert(0, datetime.now().strftime("%d-%m-%y"))
         self.date_entry.pack(pady=5, padx=10, fill="x")
 
         ctk.CTkLabel(self.left_frame, text="Amount:").pack(pady=5)
@@ -46,6 +48,7 @@ class FinanceTracker:
 
         ctk.CTkLabel(self.left_frame, text="Category:").pack(pady=5)
         self.category_combo = ctk.CTkComboBox(self.left_frame, values=self.CATEGORIES)
+        self.category_combo.set(self.CATEGORIES[0])
         self.category_combo.pack(pady=5, padx=10, fill="x")
 
         # Buttons
@@ -97,6 +100,16 @@ class FinanceTracker:
             description = self.description_entry.get()
             category = self.category_combo.get()
 
+            # Validate date format
+            if not re.match(r"\d{2}-\d{2}-\d{2}", date):
+                messagebox.showwarning("Input Error", "Date must be in DD-MM-YY format!")
+                return
+
+            # Validate amount
+            if amount <= 0:
+                messagebox.showwarning("Input Error", "Amount must be a positive number!")
+                return
+
             if not all([date, amount, description, category]):
                 messagebox.showwarning("Input Error", "All fields must be filled!")
                 return
@@ -111,15 +124,20 @@ class FinanceTracker:
             self.amount_entry.delete(0, 'end')
             self.description_entry.delete(0, 'end')
             
+            
         except ValueError:
             messagebox.showerror("Error", "Invalid input values!")
 
     def update_budget(self):
         try:
             budget = float(self.budget_entry.get())
+            if budget <= 0:
+                messagebox.showwarning("Input Error", "Budget must be a positive number!")
+                return
             self.data['budget'] = budget
             self.save_data()
             self.update_ui()
+            messagebox.showinfo("Success", "Budget updated successfully!")
         except ValueError:
             messagebox.showerror("Error", "Invalid budget value!")
 
